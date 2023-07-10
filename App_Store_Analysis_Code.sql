@@ -36,7 +36,7 @@ select min(user_rating) as MinRating,
        avg(user_rating) as AvgRating
 from AppleStore
 
-**DATA ANALYSIS**
+**DATA ANALYSIS FOR INSIGHTS**
 
 -- Determine whether paid apps have higher ratings than free apps 
 
@@ -86,7 +86,7 @@ on a.id = b.id
 GROUP by desc_length_bracket
 order by  Avg_Rating desc 
 
--- check the top rated apps in each of the app category 
+-- check the top rated apps in each of the app categories 
 
 SELECT prime_genre,
 	   track_name,
