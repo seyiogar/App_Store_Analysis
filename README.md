@@ -28,7 +28,7 @@ DATA VISUALIZATION:
 
 The data was visualized with Excel.
 
-Conclusions:
+CONCLUSIONS:
 
 1. Paid apps tend to have higher ratings than free apps.
 
