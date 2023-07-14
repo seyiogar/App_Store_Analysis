@@ -1,13 +1,12 @@
+** DATA CLEANING AND PREPARATION **
+
 SELECT *
 FROM AppleStore
 
---Check the number of unique apps in both tablesAppleStore
+-- Drop irrelevant Columns 
 
-SELECT COUNT(DISTINCT id) as UniqueAppIDs
-FROM AppleStore
-
-SELECT COUNT(DISTINCT id) as UniqueAppIDs
-FROM appleStore_description
+ALTER TABLE AppleStore 
+DROP sup_devices_num, ipadSc_urls_num, vpp_lic
 
 -- Check for missing values in key fields 
 
@@ -18,6 +17,23 @@ WHERE track_name is null  or user_rating is null or prime_genre is null
 SELECT COUNT(*) as MissingValues
 FROM appleStore_description
 WHERE app_desc is null 
+
+-- Replacing the missing values 
+
+UPDATE appleStore_description
+SET app_desc = 'No Description'
+WHERE app_desc is null 
+
+
+**DATA ANALYSIS**
+
+--Check the number of unique apps in both tablesAppleStore
+
+SELECT COUNT(DISTINCT id) as UniqueAppIDs
+FROM AppleStore
+
+SELECT COUNT(DISTINCT id) as UniqueAppIDs
+FROM appleStore_description
 
 --Find out the number of apps per genre 
 
@@ -32,8 +48,6 @@ SELECT min(user_rating) as MinRating,
 	   max(user_rating) as MaxRating,
        avg(user_rating) as AvgRating
 FROM AppleStore
-
-**DATA ANALYSIS**
 
 -- Determine whether paid apps have higher ratings than free apps 
 
@@ -140,7 +154,7 @@ FROM AppleStore
 GROUP BY track_name
 ORDER BY revenue desc
 
--- Check the app categories with the top revenues 
+-- Check the app genres with the top revenues 
 
 SELECT prime_genre,
 	   sum(rating_count_tot * price) as revenue
@@ -148,7 +162,7 @@ FROM AppleStore
 GROUP BY prime_genre
 ORDER BY revenue desc
 
--- check the top rated apps in each of the app category 
+-- check the top rated apps in each of the app genre 
 
 SELECT prime_genre,
 	   track_name,
